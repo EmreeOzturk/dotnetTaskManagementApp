@@ -53,6 +53,49 @@ namespace TaskManagementApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _container.DeleteItemAsync<TaskItem>(id, new PartitionKey(id));
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateStatus(string id, string status)
+        {
+            try 
+            {
+                var task = await _container.ReadItemAsync<TaskItem>(id, new PartitionKey(id));
+                var updatedTask = task.Resource;
+                updatedTask.Status = status;
+                updatedTask.UpdatedAt = DateTime.UtcNow;
+                
+                await _container.ReplaceItemAsync(updatedTask, id, new PartitionKey(id));
+                return Json(new { success = true });
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
+        }
+
+        // GET: Task/Edit/5
+        public async Task<IActionResult> Edit(string id)
+        {
+            var task = await _container.ReadItemAsync<TaskItem>(id, new PartitionKey(id));
+            return View(task.Resource);
+        }
+
+        // POST: Task/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(TaskItem task)
+        {
+            task.UpdatedAt = DateTime.UtcNow;
+            await _container.ReplaceItemAsync(task, task.Id, new PartitionKey(task.TaskId));
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
 

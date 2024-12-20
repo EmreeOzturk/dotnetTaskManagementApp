@@ -1,0 +1,48 @@
+@model TaskManagementApp.Models.TaskItem
+
+@{
+    ViewData["Title"] = "Edit Task";
+}
+
+<h1>Edit Task</h1>
+
+<form method="post" asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="TaskId" />
+    <input type="hidden" asp-for="CreatedAt" />
+    
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" class="form-control" asp-for="Title" required />
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" asp-for="Description" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="AssignedTo">Assigned To</label>
+        <input type="text" class="form-control" asp-for="AssignedTo" required />
+    </div>
+    <div class="form-group">
+        <label for="Status">Status</label>
+        <select class="form-control" asp-for="Status">
+            <option value="New">New</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Priority">Priority</label>
+        <select class="form-control" asp-for="Priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="DueDate">Due Date</label>
+        <input type="date" class="form-control" asp-for="DueDate" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="/Task/Index" class="btn btn-secondary">Cancel</a>
+</form> 
