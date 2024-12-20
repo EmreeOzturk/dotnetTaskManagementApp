@@ -33,7 +33,7 @@
                     <h5 class="mb-0">Quick Add Task</h5>
                 </div>
                 <div class="card-body">
-                    <form asp-controller="Home" asp-action="CreateTask" method="post">
+                    <form asp-controller="Task" asp-action="Create" method="post">
                         <div class="mb-3">
                             <label class="form-label">Task Title</label>
                             <input type="text" name="Title" class="form-control" required>
@@ -45,6 +45,18 @@
                         <div class="mb-3">
                             <label class="form-label">Due Date</label>
                             <input type="date" name="DueDate" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Assigned To</label>
+                            <input type="text" name="AssignedTo" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="Status" class="form-select">
+                                <option value="New" selected>New</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Priority</label>

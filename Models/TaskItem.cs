@@ -30,5 +30,8 @@ namespace TaskManagementApp.Models
 
         [JsonProperty("updatedAt")]
         public DateTime UpdatedAt { get; set; }
+
+        [JsonProperty("priority")]
+        public string Priority { get; set; }
     }
 }
