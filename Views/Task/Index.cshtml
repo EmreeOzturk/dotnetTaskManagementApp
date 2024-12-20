@@ -1,0 +1,36 @@
+@model IEnumerable<TaskManagementApp.Models.TaskItem>
+
+@{
+    ViewData["Title"] = "Tasks";
+}
+
+<h1>Tasks</h1>
+
+<p>
+    <a href="/Task/Create" class="btn btn-primary">Create New Task</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+            <th>Due Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.Title</td>
+                <td>@task.Description</td>
+                <td>@task.AssignedTo</td>
+                <td>@task.Status</td>
+                <td>@task.DueDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
